@@ -1,0 +1,57 @@
+# copied from https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/master/agent_deploy/kubernetes/sysdig-agent-configmap.yaml
+# on 4-16-19
+# Modified for jmx & prometheus specifics, since example voting-app will be used
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sysdig-agent
+data:
+  dragent.yaml: |
+    configmap: true
+    ### Agent tags
+    #tags: example-tag:example-value
+
+    #### Sysdig Software related config ####
+
+    # Sysdig collector address
+    # collector: 192.168.1.1
+
+    # Collector TCP port
+    # collector_port: 6666
+
+    # Whether collector accepts ssl
+    # ssl: true
+
+    # collector certificate validation
+    # ssl_verify_certificate: true
+
+    #######################################
+    new_k8s: true
+    k8s_cluster_name: sysdig-pov
+
+    jmx:
+      per_process_beans:
+        voting:
+          pattern: "worker-jar"
+          beans:
+            - query: "worker:type=Metric,*"
+              attributes:
+                - name: Dogs
+                  alias: Dogs
+                - name: Cats
+                  alias: Cats
+                - name: Votes
+                  alias: Votes
+
+    prometheus:
+      enabled: true
+      histograms: true
+
+    app_checks:
+      - name: ntp
+        check_module: ntp
+        pattern:
+          comm: ntpd
+
+    percentiles: [50, 95, 99]

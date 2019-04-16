@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      volumes:
+        - name: jenkins-data-vol
+          persistentVolumeClaim:
+            claimName: jenkins-data
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: docker-bin
+          hostPath:
+            path: /usr/bin/docker
+      containers:
+      - name: jenkins
+        image: tembleking/jenkinspinned:sko-3
+        ports:
+        - name: http
+          containerPort: 8080
+        - name : jnlp
+          containerPort: 50000
+        volumeMounts:
+        - name: jenkins-data-vol
+          mountPath: "/var/jenkins_home"
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+        - mountPath: /usr/bin/docker
+          name: docker-bin
+      securityContext:
+        fsGroup: 1000
+

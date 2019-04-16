@@ -1,0 +1,30 @@
+customerid:
+
+dev_new_k8s: true
+k8s_cluster_name:
+
+jmx:
+  per_process_beans:
+    voting:
+      pattern: "worker-jar"
+      beans:
+        - query: "worker:type=Metric,*"
+          attributes:
+            - name: Dogs
+              alias: Dogs
+            - name: Cats
+              alias: Cats
+            - name: Votes
+              alias: Votes
+
+prometheus:
+  enabled: true
+  histograms: true
+
+app_checks:
+  - name: ntp
+    check_module: ntp
+    pattern:
+      comm: ntpd
+
+percentiles: [50, 95, 99]

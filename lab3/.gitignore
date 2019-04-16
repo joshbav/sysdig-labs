@@ -1,0 +1,3 @@
+etcd/client-*
+manifests/sysdig-secret.yaml
+manifests/sysdig-account.yaml

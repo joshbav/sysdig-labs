@@ -1,6 +1,7 @@
 # copied from https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/master/agent_deploy/kubernetes/sysdig-agent-configmap.yaml
 # on 4-16-19
-# Modified for jmx & prometheus specifics, since example voting-app will be used
+
+# Modified for jmx & prometheus specifics, since example voting-app will be used. And modified for POC environment with small VMs / instances, not·
 
 apiVersion: v1
 kind: ConfigMap
@@ -9,6 +10,10 @@ metadata:
 data:
   dragent.yaml: |
     configmap: true
+    # Josh's custom 500M of kernel ram, for small VM's
+    # since the auto formula is memdump: size: <bytes> Default is 300*1024*1024 e.g. 300M
+    memdump:
+        size: 524288000
     ### Agent tags
     #tags: example-tag:example-value
 

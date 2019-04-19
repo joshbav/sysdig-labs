@@ -10,6 +10,6 @@ Install directions for Sysdig SaaS on K8s, as of 4-16-19
 
 
 UNINSTALL DIRECTIONS
-1. kubectl delete ns -n sysdig-agent
+1. kubectl delete ns sysdig-agent
 2. kubectl delete clusterrole sysdig-agent
 3. kubectl delete clusterrolebinding sysdig-cluster-role-binding

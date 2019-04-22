@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ticket-client
+  name: ticket-client
+  namespace: ticket-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ticket-client
+  template:
+    metadata:
+      labels:
+        app: ticket-client
+    spec:
+      containers:
+      - image: sysdiglabs/docker-hey:0.1
+        command: ["hey"]
+        args: ["-disable-keepalive", "-c", "9", "-z", "1000000h", "http://ticket-server:2368"]
+        name: ticket-client
+        resources:
+          requests:
+            cpu: 50m
+            memory: "32Mi"
+          limits:
+            cpu: 400m
+            memory: "128Mi"

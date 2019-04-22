@@ -24,6 +24,9 @@ spec:
             requests:
               memory: 32Mi
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "80"
       labels:
         name: result
         role: resultapp

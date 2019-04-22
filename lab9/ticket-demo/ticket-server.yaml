@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ticket-backend
+  name: ticket-server
+  namespace: ticket-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ticket-backend
+  template:
+    metadata:
+      labels:
+        app: ticket-backend
+    spec:
+      containers:
+      - image: ghost:2.19.2
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 50m
+            memory: "32Mi"
+          limits:
+            cpu: 100m
+            memory: "256Mi"
+        name: ticket-server
+        ports:
+        - containerPort: 2368
+          name: http
+          protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ticket-server
+  namespace: ticket-backend
+spec:
+  selector:
+    app: ticket-backend
+  ports:
+  - protocol: TCP
+    port: 2368
+    targetPort: 2368

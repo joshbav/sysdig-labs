@@ -4,15 +4,15 @@ metadata:
   name: result
   labels:
     name: result-deployment
-    app: example-voting-app
-  namespace: example-voting-app
+    app: voting-app
+  namespace: voting-app
 spec:
   replicas: 3
   selector:
     matchLabels:
      name: result
      role: resultapp
-     app: example-voting-app
+     app: voting-app
   template:
     spec:
       containers:
@@ -30,7 +30,7 @@ spec:
       labels:
         name: result
         role: resultapp
-        app: example-voting-app
+        app: voting-app
 ---
 apiVersion: v1
 kind: Service
@@ -38,12 +38,12 @@ metadata:
   labels:
     name: result
   name: result
-  namespace: example-voting-app
+  namespace: voting-app
 spec:
   ports:
     - port: 80
       targetPort: 80
   selector:
     name: result
-    app: example-voting-app
+    app: voting-app
     role: resultapp

@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8s-stress
+  namespace: stress
+spec:
+  replicas: 6
+  template:
+    metadata:
+      labels:
+        app: k8s-stress
+        role: k8s-stress
+    spec:
+      containers:
+        - name: k8s-stress
+          image: chriskranz/cpu-stress
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 4000m
+              memory: 4096Mi
+            limits:
+              cpu: 4500m
+              memory: 4100Mi

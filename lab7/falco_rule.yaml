@@ -1,0 +1,10 @@
+- rule: Blacklisted Containers
+  desc: >
+    Detect the initial process started by a container that is from a list of blacklisted containers.
+  condition: container_started and container and blacklisted_containers
+  output: Container started is blacklisted (user=%user.name command=%proc.cmdline %container.info image=%container.image.repository:%container.image.tag)
+  priority: WARNING
+  tags: [container, mitre_lateral_movement]
+
+- macro: blacklisted_containers
+  condition: (container.name startswith 'k8s_actor_actor')

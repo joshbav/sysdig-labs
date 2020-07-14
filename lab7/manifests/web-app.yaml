@@ -1,0 +1,43 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: www
+  labels:
+    name: www-deployment
+    app: web-app
+  namespace: web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     name: www
+     role: www
+     app: web-app
+  template:
+    spec:
+      containers:
+        - name: pinger
+          image: chriskranz/openbanking_access
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 0.1
+              memory: 128Mi
+            requests:
+              memory: 64Mi
+              cpu: 0.05
+    metadata:
+      labels:
+        name: www
+        role: www
+        app: web-app
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: www
+spec:
+  selector:
+    app: web-app
+  ports:
+    - port: 80

@@ -4,15 +4,15 @@ metadata:
   name: worker
   labels:
     name: worker-deployment
-    app: example-voting-app
-  namespace: example-voting-app
+    app: voting-app
+  namespace: voting-app
 spec:
   replicas: 1
   selector:
     matchLabels:
      name: worker
      role: workerapp
-     app: example-voting-app
+     app: voting-app
   template:
     spec:
       containers:
@@ -27,4 +27,4 @@ spec:
       labels:
         name: worker
         role: workerapp
-        app: example-voting-app
+        app: voting-app

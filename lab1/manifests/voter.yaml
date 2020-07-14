@@ -4,15 +4,15 @@ metadata:
   name: voter
   labels:
     name: voter-deployment
-    app: example-voting-app
-  namespace: example-voting-app
+    app: voting-app
+  namespace: voting-app
 spec:
   replicas: 1
   selector:
     matchLabels:
      name: voter
      role: voterapp
-     app: example-voting-app
+     app: voting-app
   template:
     spec:
       containers:
@@ -20,7 +20,7 @@ spec:
           image: mateobur/voter:sko
           env:
             - name: VOTE
-              value: "vote.example-voting-app.svc.cluster.local"
+              value: "vote.voting-app.svc.cluster.local"
             - name: PORT
               value: "80"
           resources:
@@ -32,4 +32,4 @@ spec:
       labels:
         name: voter
         role: voterapp
-        app: example-voting-app
+        app: voting-app

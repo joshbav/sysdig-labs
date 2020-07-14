@@ -4,15 +4,15 @@ metadata:
   name: observer
   labels:
     name: observer-deployment
-    app: example-voting-app
-  namespace: example-voting-app
+    app: voting-app
+  namespace: voting-app
 spec:
   replicas: 1
   selector:
     matchLabels:
      name: observer
      role: observerapp
-     app: example-voting-app
+     app: voting-app
   template:
     spec:
       containers:
@@ -20,7 +20,7 @@ spec:
           image: bencer/recurling:0.1
           env:
             - name: URL
-              value: "result.example-voting-app.svc.cluster.local"
+              value: "result.voting-app.svc.cluster.local"
             - name: SLEEP
               value: "5"
           resources:
@@ -32,4 +32,4 @@ spec:
       labels:
         name: observer
         role: observerapp
-        app: example-voting-app
+        app: voting-app

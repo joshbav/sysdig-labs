@@ -1,6 +1,3 @@
-# copied from https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/master/agent_deploy/kubernetes/sysdig-agent-clusterrole.yaml
-# on 4-16-19
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -12,6 +9,7 @@ rules:
   - pods
   - replicationcontrollers
   - services
+  - endpoints
   - events
   - limitranges
   - namespaces

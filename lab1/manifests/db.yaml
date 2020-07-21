@@ -24,6 +24,9 @@ spec:
               cpu: 0.25
             requests:
               memory: 128Mi
+          env:
+            - name : "POSTGRES_PASSWORD"
+              value : "test"
     metadata:
       labels:
         name: db

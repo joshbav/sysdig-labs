@@ -12,7 +12,7 @@ Install directions for Sysdig SaaS on K8s, as of 7-20
 5. kubectl create clusterrolebinding sysdig-agent --clusterrole=sysdig-agent --serviceaccount=sysdig-agent:sysdig-agent
 
 6. kubectl apply -n sysdig-agent -f sysdig-agent-configmap.yaml
-6a. kubectl apply -n sysdig-agent -f https://raw.githubusercontent.com/joshbav/sysdig-labs/master/sysdig-agent/sysdig-agent-configmap.yaml,https://raw.githubusercontent.com/joshbav/sysdig-labs/master/sysdig-agent/sysdig-agent-daemonset-v2.yaml,https://raw.githubusercontent.com/joshbav/sysdig-labs/master/sysdig-agent/sysdig-image-analyzer-configmap.yaml,https://raw.githubusercontent.com/joshbav/sysdig-labs/master/sysdig-agent/sysdig-agent-daemonset-v2.yaml
+6a. kubectl apply -n sysdig-agent -f https://raw.githubusercontent.com/joshbav/sysdig-labs/master/sysdig-agent/sysdig-agent-configmap.yaml,https://raw.githubusercontent.com/joshbav/sysdig-labs/master/sysdig-agent/sysdig-agent-daemonset-v2.yaml,https://raw.githubusercontent.com/joshbav/sysdig-labs/master/sysdig-agent/sysdig-image-analyzer-configmap.yaml,https://raw.githubusercontent.com/joshbav/sysdig-labs/master/sysdig-agent/sysdig-image-analyzer-daemonset.yaml
 
 7. kubectl apply -f sysdig-agent-daemonset-v2.yaml -n sysdig-agent
 8. kubectl apply -f sysdig-image-analyzer-configmap.yaml -n sysdig-agent
